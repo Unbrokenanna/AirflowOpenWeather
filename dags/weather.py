@@ -59,10 +59,11 @@ with DAG(
     check_api = HttpSensor(
         task_id="check_api",
         http_conn_id="weather_conn_http",
-        endpoint="data/3.0/onecall",
+        endpoint="data/3.0/onecall/timemachine",
         request_params={
             "lat": 49.8397,
             "lon": 24.0297,
+            "dt": "{{logical_date.int_timestamp }}",
             "appid": Variable.get("WEATHER_API_KEY"),
             "units": "metric"
     },
